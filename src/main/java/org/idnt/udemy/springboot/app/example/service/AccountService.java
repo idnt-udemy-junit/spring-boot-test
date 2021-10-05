@@ -5,8 +5,8 @@ import org.idnt.udemy.springboot.app.example.model.Account;
 import java.math.BigDecimal;
 
 public interface AccountService {
-    Account findById(Long id);
-    int checkTotalTransactions(Long id);
-    BigDecimal checkBalance(Long id);
-    void transfer(Long idOrigin, Long idTarget, BigDecimal quantity);
+    Account findById(Long idAccount);
+    int checkTotalTransactions(Long idBank);
+    BigDecimal checkBalance(Long idAccount);
+    void transfer(Long idBank, Long idAccountOrigin, Long idAccountTarget, BigDecimal quantity);
 }
