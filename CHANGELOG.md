@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+---
+
+## `v1.0.0` _05/10/2021_
+
 ##ADD
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#063` - Deshabilitando la traza del logs de Spring en el contexto test**
   - _The configuration to disable the banner and Spring Log traces from the test context has been added._
