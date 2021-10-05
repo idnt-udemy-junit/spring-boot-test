@@ -19,34 +19,34 @@ public class AccountServiceImpl implements AccountService {
     private BankRepository bankRepository;
 
     @Override
-    public Account findById(final Long id) {
-        return this.accountRepository.findByid(id);
+    public Account findById(final Long idAccount) {
+        return this.accountRepository.findByid(idAccount);
     }
 
     @Override
-    public int checkTotalTransactions(final Long id) {
-        Bank bank = this.bankRepository.findByid(id);
+    public int checkTotalTransactions(final Long idBank) {
+        Bank bank = this.bankRepository.findByid(idBank);
         return bank.getTotalTransactions();
     }
 
     @Override
-    public BigDecimal checkBalance(final Long id) {
-        Account account = this.accountRepository.findByid(id);
+    public BigDecimal checkBalance(final Long idAccount) {
+        Account account = this.accountRepository.findByid(idAccount);
         return account.getBalance();
     }
 
     @Override
-    public void transfer(final Long idOrigin, final Long idTarget, final BigDecimal quantity) {
-        Bank bank = this.bankRepository.findByid(1L);
+    public void transfer(final Long idBank, final Long idAccountOrigin, final Long idAccountTarget, final BigDecimal quantity) {
+        Bank bank = this.bankRepository.findByid(idBank);
         int totalTransactions = bank.getTotalTransactions();
         bank.setTotalTransactions(++totalTransactions);
         this.bankRepository.update(bank);
 
-        Account accountOrigin = this.accountRepository.findByid(idOrigin);
+        Account accountOrigin = this.accountRepository.findByid(idAccountOrigin);
         accountOrigin.debit(quantity);
         this.accountRepository.update(accountOrigin);
 
-        Account accountTarget = this.accountRepository.findByid(idTarget);
+        Account accountTarget = this.accountRepository.findByid(idAccountTarget);
         accountTarget.credit(quantity);
         this.accountRepository.update(accountTarget);
     }
