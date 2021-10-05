@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface BankRepository {
     List<Bank> findAll();
-    Bank findByid(Long id);
+    Bank findById(Long id);
     void update(Bank account);
 }
