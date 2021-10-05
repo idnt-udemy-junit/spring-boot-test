@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#056` - Implementando la clase de servicio (Service)**
+  - _The `AccountService` class has been implemented._
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#055` - Creando los repositorios**  
   - _`Account` and `Bank` repository interfaces have been created._
   - _`Account` service has been created._  
