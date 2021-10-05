@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#063` - Deshabilitando la traza del logs de Spring en el contexto test**
+  - _The configuration to disable the banner and Spring Log traces from the test context has been added._
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#061` - Uso de anotaciones de spring @MockBean y @Autowired**
   - _The `setUp` method of the `SpringbootTestApplicationTests` class has been removed._
   - _Mocks are set through Spring annotations._
