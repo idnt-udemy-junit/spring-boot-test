@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#061` - Uso de anotaciones de spring @MockBean y @Autowired**
+  - _The `setUp` method of the `SpringbootTestApplicationTests` class has been removed._
+  - _Mocks are set through Spring annotations._
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#060` - Escribiendo tests con assertSame**
   - _The `verify` methods of tests of `SpringbootTestApplicationTests` class have been updated and several `verify` methods have been added in all tests._
   - _The `findByid` method in `AccountRepository` class has been renamed by `findById`._
