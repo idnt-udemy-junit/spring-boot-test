@@ -1,0 +1,13 @@
+#Logs desactived
+logging:
+  level:
+    org:
+      springframework: off
+
+    root: off
+
+#Spring Banner desactived
+spring:
+  main:
+    banner-mode: off
+
