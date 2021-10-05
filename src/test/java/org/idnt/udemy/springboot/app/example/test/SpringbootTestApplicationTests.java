@@ -68,9 +68,12 @@ class SpringbootTestApplicationTests {
 		//Then - Verifiy calls methods
 		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_ORIGIN);
 		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_TARGET);
+		verify(this.accountRepository, times(6)).findByid(anyLong());
 		verify(this.accountRepository, times(2)).update(any(Account.class));
+		verify(this.accountRepository, never()).findAll();
 		verify(this.bankRepository, times(3)).findById(ID_BANK);
 		verify(this.bankRepository).update(any(Bank.class));
+		verify(this.bankRepository, never()).findAll();
 	}
 
 	@Test
@@ -113,8 +116,11 @@ class SpringbootTestApplicationTests {
 		//Then - Verifiy calls methods
 		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_ORIGIN);
 		verify(this.accountRepository, times(2)).findByid(ID_ACCOUNT_TARGET);
-		verify(this.accountRepository, times(0)).update(any(Account.class));
+		verify(this.accountRepository, times(5)).findByid(anyLong());
+		verify(this.accountRepository, never()).findAll();
+		verify(this.accountRepository, never()).update(any(Account.class));
 		verify(this.bankRepository, times(2)).findById(ID_BANK);
-		verify(this.bankRepository, times(0)).update(any(Bank.class));
+		verify(this.bankRepository, never()).update(any(Bank.class));
+		verify(this.bankRepository, never()).findAll();
 	}
 }
