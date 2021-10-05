@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#055` - Creando los repositorios**  
+  - _`Account` and `Bank` repository interfaces have been created._
+  - _`Account` service has been created._  
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#054` - Creando las clases del modelo**  
   - _An Exception has been created to trigger when there is not enough money in an account._  
   - _`Account` and `Bank` models have been created._  
