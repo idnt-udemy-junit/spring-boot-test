@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.net.IDN;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -66,9 +66,9 @@ class SpringbootTestApplicationTests {
 		assertEquals(1, totalTransactions);
 
 		//Then - Verifiy calls methods
-		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_ORIGIN);
-		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_TARGET);
-		verify(this.accountRepository, times(6)).findByid(anyLong());
+		verify(this.accountRepository, times(3)).findById(ID_ACCOUNT_ORIGIN);
+		verify(this.accountRepository, times(3)).findById(ID_ACCOUNT_TARGET);
+		verify(this.accountRepository, times(6)).findById(anyLong());
 		verify(this.accountRepository, times(2)).update(any(Account.class));
 		verify(this.accountRepository, never()).findAll();
 		verify(this.bankRepository, times(3)).findById(ID_BANK);
@@ -114,13 +114,39 @@ class SpringbootTestApplicationTests {
 		assertEquals(0, totalTransactions);
 
 		//Then - Verifiy calls methods
-		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_ORIGIN);
-		verify(this.accountRepository, times(2)).findByid(ID_ACCOUNT_TARGET);
-		verify(this.accountRepository, times(5)).findByid(anyLong());
+		verify(this.accountRepository, times(3)).findById(ID_ACCOUNT_ORIGIN);
+		verify(this.accountRepository, times(2)).findById(ID_ACCOUNT_TARGET);
+		verify(this.accountRepository, times(5)).findById(anyLong());
 		verify(this.accountRepository, never()).findAll();
 		verify(this.accountRepository, never()).update(any(Account.class));
 		verify(this.bankRepository, times(2)).findById(ID_BANK);
 		verify(this.bankRepository, never()).update(any(Bank.class));
 		verify(this.bankRepository, never()).findAll();
+	}
+
+	@Test
+	@DisplayName("Assertions.assertSame() - Test that proves that the \"findById\" method of the \"AccountServiceImpl\" class returns the same reference when searching for the same account by ID.")
+	void testCheckAccountSameReference_assertSame() {
+		//Given
+		final Long ID_ACCOUNT = 1L;
+
+		when(this.accountRepository.findById(ID_ACCOUNT)).thenReturn(DATA.getAccount001());
+
+		//When - Find account by ID
+		Account account = this.accountService.findById(ID_ACCOUNT);
+		final Account EXPECTED = this.accountService.findById(ID_ACCOUNT);
+
+		//Then - Checks that accounts are equals and the "findById" method of "AccountRepository" call 2 times
+		assertSame(EXPECTED, account);
+		assertTrue(account == EXPECTED,
+				() -> String.format("The accounts must be equals. EXPECTED: %s // ACTUAL: %s", EXPECTED, account));
+
+		verify(this.accountRepository, times(2)).findById(ID_ACCOUNT);
+		verify(this.accountRepository, never()).update(any(Account.class));
+		verify(this.accountRepository, never()).findAll();
+		verify(this.bankRepository, never()).findById(anyLong());
+		verify(this.bankRepository, never()).update(any(Bank.class));
+		verify(this.bankRepository, never()).findAll();
+
 	}
 }
