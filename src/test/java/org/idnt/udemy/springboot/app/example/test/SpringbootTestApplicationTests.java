@@ -1,4 +1,4 @@
-package org.idnt.udemy.springboot.app.example;
+package org.idnt.udemy.springboot.app.example.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
