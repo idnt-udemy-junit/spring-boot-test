@@ -1,19 +1,19 @@
 package org.idnt.udemy.springboot.app.example.service.impl;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.idnt.udemy.springboot.app.example.model.Account;
 import org.idnt.udemy.springboot.app.example.model.Bank;
 import org.idnt.udemy.springboot.app.example.repository.AccountRepository;
 import org.idnt.udemy.springboot.app.example.repository.BankRepository;
 import org.idnt.udemy.springboot.app.example.service.AccountService;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@Service("accountService")
 public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
     private BankRepository bankRepository;
