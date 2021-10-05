@@ -15,8 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class SpringbootTestApplicationTests {
@@ -51,22 +50,33 @@ class SpringbootTestApplicationTests {
 		when(this.accountService.findById(ID_ACCOUNT_TARGET)).thenReturn(this.account002);
 		when(this.bankRepository.findById(ID_BANK)).thenReturn(this.bank);
 
-		//When - Pre-transfer
+		//When - Get balances from accounts and get total transactions from bank
 		BigDecimal balanceOrigin = this.accountService.checkBalance(ID_ACCOUNT_ORIGIN);
 		BigDecimal balanceTarget = this.accountService.checkBalance(ID_ACCOUNT_TARGET);
+		int totalTransactions = this.accountService.checkTotalTransactions(ID_BANK);
 
-		//Then - Pre-transfer
+		//Then - Checks balances and total transactions
 		assertEquals("1000", balanceOrigin.toPlainString());
 		assertEquals("2000", balanceTarget.toPlainString());
+		assertEquals(0, totalTransactions);
 
-		//When - Post-transfer
+		//When - Transfer money inter-accounts - Get new balances from accounts and get total transactions from bank
 		this.accountService.transfer(ID_BANK, ID_ACCOUNT_ORIGIN, ID_ACCOUNT_TARGET, new BigDecimal("100"));
 		BigDecimal newBalanceOrigin = this.accountService.checkBalance(ID_ACCOUNT_ORIGIN);
 		BigDecimal newBalanceTarget = this.accountService.checkBalance(ID_ACCOUNT_TARGET);
+		totalTransactions = this.accountService.checkTotalTransactions(ID_BANK);
 
-		//Then - Post-transfer
+		//Then - Checks new balances and total transactions
 		assertEquals("900", newBalanceOrigin.toPlainString());
 		assertEquals("2100", newBalanceTarget.toPlainString());
+		assertEquals(1, totalTransactions);
+
+		//Then - Verifiy calls methods
+		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_ORIGIN);
+		verify(this.accountRepository, times(3)).findByid(ID_ACCOUNT_TARGET);
+		verify(this.accountRepository, times(2)).update(any(Account.class));
+		verify(this.bankRepository, times(3)).findById(ID_BANK);
+		verify(this.bankRepository).update(any(Bank.class));
 	}
 
 }
