@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#058` - Test verify**  
+  - _The `testCorrectTransferInterAccounts` of `SpringbootTestApplicationTests` class has been updated and the `verify` methods have been added._
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#057` - Escribiendo nuestros tests con JUnit y mockito**  
   - _The `AccountService` and `AccountServiceImpl` have been updated._
   - _The `BankRepository` have been updated._
