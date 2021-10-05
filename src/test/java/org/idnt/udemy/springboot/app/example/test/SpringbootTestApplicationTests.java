@@ -6,31 +6,28 @@ import org.idnt.udemy.springboot.app.example.model.Bank;
 import org.idnt.udemy.springboot.app.example.repository.AccountRepository;
 import org.idnt.udemy.springboot.app.example.repository.BankRepository;
 import org.idnt.udemy.springboot.app.example.service.AccountService;
-import org.idnt.udemy.springboot.app.example.service.impl.AccountServiceImpl;
 import org.idnt.udemy.springboot.app.example.test.util.DATA;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.math.BigDecimal;
-import java.net.IDN;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class SpringbootTestApplicationTests {
+	@MockBean
 	private AccountRepository accountRepository;
-	private BankRepository bankRepository;
-	private AccountService accountService;
 
-	@BeforeEach
-	void setUp() {
-		this.accountRepository = mock(AccountRepository.class);
-		this.bankRepository = mock(BankRepository.class);
-		this.accountService = new AccountServiceImpl(this.accountRepository, this.bankRepository);
-	}
+	@MockBean
+	private BankRepository bankRepository;
+
+	@Autowired
+	private AccountService accountService;
 
 	@Test
 	@DisplayName("Test that checks that an inter-account transfer has been made correctly")
@@ -40,8 +37,8 @@ class SpringbootTestApplicationTests {
 		final Long ID_ACCOUNT_TARGET = 2L;
 		final Long ID_BANK = 1L;
 
-		when(this.accountService.findById(ID_ACCOUNT_ORIGIN)).thenReturn(DATA.getAccount001());
-		when(this.accountService.findById(ID_ACCOUNT_TARGET)).thenReturn(DATA.getAccount002());
+		when(this.accountRepository.findById(ID_ACCOUNT_ORIGIN)).thenReturn(DATA.getAccount001());
+		when(this.accountRepository.findById(ID_ACCOUNT_TARGET)).thenReturn(DATA.getAccount002());
 		when(this.bankRepository.findById(ID_BANK)).thenReturn(DATA.getBank());
 
 		//When - Get balances from accounts and get total transactions from bank
@@ -84,8 +81,8 @@ class SpringbootTestApplicationTests {
 		final Long ID_ACCOUNT_TARGET = 2L;
 		final Long ID_BANK = 1L;
 
-		when(this.accountService.findById(ID_ACCOUNT_ORIGIN)).thenReturn(DATA.getAccount001());
-		when(this.accountService.findById(ID_ACCOUNT_TARGET)).thenReturn(DATA.getAccount002());
+		when(this.accountRepository.findById(ID_ACCOUNT_ORIGIN)).thenReturn(DATA.getAccount001());
+		when(this.accountRepository.findById(ID_ACCOUNT_TARGET)).thenReturn(DATA.getAccount002());
 		when(this.bankRepository.findById(ID_BANK)).thenReturn(DATA.getBank());
 
 		//When - Get balances from accounts and get total transactions from bank
