@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#059` - Escribiendo tests assertThrow para afirmar que la excepción lanzada sea correcta.**
+  - _The `DATA` class has been updated_
+  - _The `setUp` method of `SpringbootTestApplicationTests` class has been updated_
+  - _The `testTransferInterAccounts_NotEnoughMoneyException` test has been added in `SpringbootTestApplicationTests` class._
+  - _The `transfer` method of `AccountServiceImpl` class has been updated._
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#058` - Test verify**  
   - _The `testCorrectTransferInterAccounts` of `SpringbootTestApplicationTests` class has been updated and the `verify` methods have been added._
   

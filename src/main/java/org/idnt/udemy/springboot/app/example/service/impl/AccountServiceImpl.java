@@ -37,11 +37,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void transfer(final Long idBank, final Long idAccountOrigin, final Long idAccountTarget, final BigDecimal quantity) {
-        Bank bank = this.bankRepository.findById(idBank);
-        int totalTransactions = bank.getTotalTransactions();
-        bank.setTotalTransactions(++totalTransactions);
-        this.bankRepository.update(bank);
-
         Account accountOrigin = this.accountRepository.findByid(idAccountOrigin);
         accountOrigin.debit(quantity);
         this.accountRepository.update(accountOrigin);
@@ -49,5 +44,10 @@ public class AccountServiceImpl implements AccountService {
         Account accountTarget = this.accountRepository.findByid(idAccountTarget);
         accountTarget.credit(quantity);
         this.accountRepository.update(accountTarget);
+
+        Bank bank = this.bankRepository.findById(idBank);
+        int totalTransactions = bank.getTotalTransactions();
+        bank.setTotalTransactions(++totalTransactions);
+        this.bankRepository.update(bank);
     }
 }
