@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 ##ADD
+- **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#060` - Escribiendo tests con assertSame**
+  - _The `verify` methods of tests of `SpringbootTestApplicationTests` class have been updated and several `verify` methods have been added in all tests._
+  - _The `findByid` method in `AccountRepository` class has been renamed by `findById`._
+  - _The `testCheckAccountSameReference_assertSame` test has been added in `SpringbootTestApplicationTests` class to test `assertSame` method._
+  
+
 - **`feature` `#04 - Spring Boot: Test de Servicios (Mockito)` // `#059` - Escribiendo tests assertThrow para afirmar que la excepción lanzada sea correcta.**
   - _The `DATA` class has been updated_
   - _The `setUp` method of `SpringbootTestApplicationTests` class has been updated_
