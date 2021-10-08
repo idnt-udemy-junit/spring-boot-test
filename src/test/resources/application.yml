@@ -5,6 +5,8 @@ logging:
       springframework: off
 
     root: off
+    hibernate:
+      SQL: debug
 
 #Spring Banner desactived
 spring:
