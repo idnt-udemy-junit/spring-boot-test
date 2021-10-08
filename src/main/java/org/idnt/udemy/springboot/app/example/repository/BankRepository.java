@@ -1,11 +1,6 @@
 package org.idnt.udemy.springboot.app.example.repository;
 
 import org.idnt.udemy.springboot.app.example.model.Bank;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface BankRepository {
-    List<Bank> findAll();
-    Bank findById(Long id);
-    void update(Bank account);
-}
+public interface BankRepository extends JpaRepository<Bank, Long> {}
