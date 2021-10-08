@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 #ADD
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#067` - Modificando nuestros repositorios con Spring Data JPA**
+  - _The `SpringBootTestApplicationTests` and `DATA` class has been updated to solve some errors caused that update of repositories and service._ 
+  - _The `AccountServiceImpl` class has been updated to solve some errors caused that update of repositories._
+  - _The repositories has been converted to `JpaRepository`._
+  
+
 - **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#065` - Configurando el contexto de persistencia JPA y clases entities para test**
   - _The `import.sql` file has been added to aggregate test data to h2 database._
   - _The models have been mapped to database tables with JPA annotations._
