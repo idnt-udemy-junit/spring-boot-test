@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+#ADD
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#065` - Configurando el contexto de persistencia JPA y clases entities para test**
+  - _The `import.sql` file has been added to aggregate test data to h2 database._
+  - _The models have been mapped to database tables with JPA annotations._
+  - _The configuration to disable Hibernate Log traces from the test context has been added._
+  - _The JPA and h2 database dependencies have been added in pom file._
 ---
 
 ## `v1.0.0` _05/10/2021_
