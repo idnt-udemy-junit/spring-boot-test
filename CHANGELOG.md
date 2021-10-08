@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 #ADD
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#068` - Modificando nuestros repositorios con Spring Data JPA parte 2**  
+  - _A new method to find an `Account` by `personName` attribute has been created in `AccountRepository` class._
+  
+
 - **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#067` - Modificando nuestros repositorios con Spring Data JPA**
   - _The `SpringBootTestApplicationTests` and `DATA` class has been updated to solve some errors caused that update of repositories and service._ 
   - _The `AccountServiceImpl` class has been updated to solve some errors caused that update of repositories._
