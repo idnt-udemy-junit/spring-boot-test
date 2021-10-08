@@ -66,10 +66,10 @@ class SpringbootTestApplicationTests {
 		verify(this.accountRepository, times(3)).findById(ID_ACCOUNT_ORIGIN);
 		verify(this.accountRepository, times(3)).findById(ID_ACCOUNT_TARGET);
 		verify(this.accountRepository, times(6)).findById(anyLong());
-		verify(this.accountRepository, times(2)).update(any(Account.class));
+		verify(this.accountRepository, times(2)).save(any(Account.class));
 		verify(this.accountRepository, never()).findAll();
 		verify(this.bankRepository, times(3)).findById(ID_BANK);
-		verify(this.bankRepository).update(any(Bank.class));
+		verify(this.bankRepository).save(any(Bank.class));
 		verify(this.bankRepository, never()).findAll();
 	}
 
@@ -115,9 +115,9 @@ class SpringbootTestApplicationTests {
 		verify(this.accountRepository, times(2)).findById(ID_ACCOUNT_TARGET);
 		verify(this.accountRepository, times(5)).findById(anyLong());
 		verify(this.accountRepository, never()).findAll();
-		verify(this.accountRepository, never()).update(any(Account.class));
+		verify(this.accountRepository, never()).save(any(Account.class));
 		verify(this.bankRepository, times(2)).findById(ID_BANK);
-		verify(this.bankRepository, never()).update(any(Bank.class));
+		verify(this.bankRepository, never()).save(any(Bank.class));
 		verify(this.bankRepository, never()).findAll();
 	}
 
@@ -139,10 +139,10 @@ class SpringbootTestApplicationTests {
 				() -> String.format("The accounts must be equals. EXPECTED: %s // ACTUAL: %s", EXPECTED, account));
 
 		verify(this.accountRepository, times(2)).findById(ID_ACCOUNT);
-		verify(this.accountRepository, never()).update(any(Account.class));
+		verify(this.accountRepository, never()).save(any(Account.class));
 		verify(this.accountRepository, never()).findAll();
 		verify(this.bankRepository, never()).findById(anyLong());
-		verify(this.bankRepository, never()).update(any(Bank.class));
+		verify(this.bankRepository, never()).save(any(Bank.class));
 		verify(this.bankRepository, never()).findAll();
 
 	}
