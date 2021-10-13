@@ -46,7 +46,7 @@ public class AccountController {
     }
 
     @PostMapping("/save")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> save(@RequestBody final Account account){
         return null;
     }
