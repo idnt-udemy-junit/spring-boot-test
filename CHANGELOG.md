@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+--- 
+
+## `v1.1.0` _13/10/2021_
+
 #ADD
 - **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#071` - Escribiendo pruebas para el update y el delete**
   - _The test to test the `update` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
@@ -37,6 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - _The models have been mapped to database tables with JPA annotations._
   - _The configuration to disable Hibernate Log traces from the test context has been added._
   - _The JPA and h2 database dependencies have been added in pom file._
+  
+
 ---
 
 ## `v1.0.0` _05/10/2021_
