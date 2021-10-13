@@ -109,6 +109,23 @@ public class IntegrationJpaTest {
 //        Account account = accountOP.get();
 //        assertEquals("Patricia", account.getPersonName());
 //        assertEquals("3000", account.getBalance().toPlainString());
+    }
 
+    @Test
+    @DisplayName("Test that checks that a record in the accounts table is correctly updated.")
+    void testUpdate() {
+        //Given
+        final String PERSON_NAME = "Patricia";
+        Account newAccount = new Account(null, PERSON_NAME, new BigDecimal("3000"));
+        Account accountSaved = this.accountRepository.save(newAccount);
+
+        //When
+        accountSaved.debit(new BigDecimal("500"));
+        Account accountEdited = this.accountRepository.save(accountSaved);
+
+        //Then
+        assertNotNull(accountEdited, () -> "The result mustn't be null");
+        assertEquals("Patricia", accountEdited.getPersonName());
+        assertEquals("2500", accountEdited.getBalance().toPlainString());
     }
 }
