@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#079` - Ejecutando tests con Cobertura de código (Code Coverage)**
+  - _The `date` parameter that return `transfer` method of `AccountController` class has been updated._
+  - _The `testTransfer` test in `AccountControllerTest` class has been updated._
+  
+
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#078` - Escribiendo pruebas para el controlador parte 2**
   - _The `TransactionDTO` class has been updated._
   - _The `testTransfer` test has been created in the `AccountControllerTest` class to test the endpoint that performs the transfer operation between accounts from the account IDs._
