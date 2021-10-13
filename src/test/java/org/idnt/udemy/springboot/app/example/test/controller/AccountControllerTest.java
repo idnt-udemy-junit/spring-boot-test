@@ -122,6 +122,8 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$[1].balance").value("2000"))
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(content().json(this.objectMapper.writeValueAsString(ACCOUNTS_LIST)));
+
+        verify(this.accountService).findAll();
     }
 
     @Test
