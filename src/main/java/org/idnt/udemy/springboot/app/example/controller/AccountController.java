@@ -28,7 +28,7 @@ public class AccountController {
     @GetMapping("/list")
     @ResponseStatus(HttpStatus.OK)
     public List<Account> list(){
-        return null;
+        return this.accountService.findAll();
     }
 
     @PostMapping("/transfer")
