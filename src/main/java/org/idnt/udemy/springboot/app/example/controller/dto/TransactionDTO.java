@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class TransactionDTO {
     private Long idBank;
-    private Long idAccounOrigin;
+    private Long idAccountOrigin;
     private Long idAccountTarget;
     private BigDecimal quantity;
 }
