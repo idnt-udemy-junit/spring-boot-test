@@ -18,9 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -95,5 +98,28 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.transaction.quantity").value(QUANTITY));
 
         verify(this.accountService).transfer(ID_BANK, ID_ACC_ORIGIN, ID_ACC_TARGET, QUANTITY);
+    }
+
+    @Test
+    @DisplayName("Test that verifies that the endpoint that performs the account listing is working correctly.")
+    void testList() throws Exception {
+        //Given
+        final List<Account> ACCOUNTS_LIST = Arrays.asList(DATA.getAccount001().get(), DATA.getAccount002().get());
+        when(this.accountService.findAll()).thenReturn(ACCOUNTS_LIST);
+
+        //When
+        this.mockMvc.perform(get("/api/accounts/list").contentType(MediaType.APPLICATION_JSON))
+
+        //Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").value(1L))
+                .andExpect(jsonPath("$[0].personName").value("Andrés"))
+                .andExpect(jsonPath("$[0].balance").value("1000"))
+                .andExpect(jsonPath("$[1].id").value(2L))
+                .andExpect(jsonPath("$[1].personName").value("Jhon"))
+                .andExpect(jsonPath("$[1].balance").value("2000"))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(ACCOUNTS_LIST)));
     }
 }
