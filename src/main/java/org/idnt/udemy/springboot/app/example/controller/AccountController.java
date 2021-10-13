@@ -27,10 +27,10 @@ public class AccountController {
     @PostMapping("/transfer")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> transfer(@RequestBody final TransactionDTO transactionDTO){
-        this.accountService.transfer(transactionDTO.getIdBank(), transactionDTO.getIdAccounOrigin(), transactionDTO.getIdAccountTarget(), transactionDTO.getQuantity());
+        this.accountService.transfer(transactionDTO.getIdBank(), transactionDTO.getIdAccountOrigin(), transactionDTO.getIdAccountTarget(), transactionDTO.getQuantity());
 
         Map<String, Object> response = new HashMap<>();
-        response.put("date", LocalDate.now());
+        response.put("date", LocalDate.now().toString());
         response.put("status", "OK");
         response.put("message", "Successful transfer");
         response.put("transaction", transactionDTO);

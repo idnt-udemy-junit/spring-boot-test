@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,6 +69,12 @@ public class AccountControllerTest {
         final Long ID_ACC_TARGET = 2L;
         final BigDecimal QUANTITY = new BigDecimal("500");
         final TransactionDTO TRANSACTION_DTO = new TransactionDTO(ID_BANK, ID_ACC_ORIGIN, ID_ACC_TARGET, QUANTITY);
+        final Map<String, Object> TRANSACTION_EXPECTED = new HashMap<>();
+        TRANSACTION_EXPECTED.put("date", LocalDate.now().toString());
+        TRANSACTION_EXPECTED.put("status", "OK");
+        TRANSACTION_EXPECTED.put("message", "Successful transfer");
+        TRANSACTION_EXPECTED.put("transaction", TRANSACTION_DTO);
+
         doNothing().when(this.accountService).transfer(ID_BANK, ID_ACC_ORIGIN, ID_ACC_TARGET, QUANTITY);
 
         //When
@@ -80,6 +88,7 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.date").value(LocalDate.now().toString()))
                 .andExpect(jsonPath("$.message").value("Successful transfer"))
                 .andExpect(jsonPath("$.status").value("OK"))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(TRANSACTION_EXPECTED)))
                 .andExpect(jsonPath("$.transaction.idAccountOrigin").value(ID_ACC_ORIGIN))
                 .andExpect(jsonPath("$.transaction.idAccountTarget").value(ID_ACC_TARGET))
                 .andExpect(jsonPath("$.transaction.idBank").value(ID_BANK))
