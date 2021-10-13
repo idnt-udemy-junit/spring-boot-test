@@ -14,12 +14,12 @@ import javax.persistence.*;
 public class Bank {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name="name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name="totalTransactions")
+    @Column(name = "TOTAL_TRANSACTIONS")
     private int totalTransactions;
 }

@@ -13,17 +13,17 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="ACCOUNTS")
+@Table(name = "ACCOUNTS")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name="personName")
+    @Column(name = "PERSON_NAME")
     private String personName;
 
-    @Column(name="balance")
+    @Column(name = "BALANCE")
     private BigDecimal balance;
 
     public void debit(final BigDecimal quantity) throws NotEnoughMoneyException{
