@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#080` - Escribiendo más pruebas con MockMvc para el listar**
+  - _The `findAll` and `save` methods in account service has been created._
+  - _The `list` and `save` methods (endpoints) in account controller has been created._
+  - _The `testList` test in `AccountControllerTest` class has been created to test that the endpoint that performs the account listing is working correctly._
+  - _The `list` method in `AccountController` has been implemented._
+  
+
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#079` - Ejecutando tests con Cobertura de código (Code Coverage)**
   - _The `date` parameter that return `transfer` method of `AccountController` class has been updated._
   - _The `testTransfer` test in `AccountControllerTest` class has been updated._
