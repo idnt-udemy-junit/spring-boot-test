@@ -2,6 +2,7 @@ package org.idnt.udemy.springboot.app.example.test.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.number.BigDecimalCloseTo;
 import org.idnt.udemy.springboot.app.example.controller.AccountController;
 import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
 import org.idnt.udemy.springboot.app.example.model.Account;
@@ -121,5 +122,44 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$[1].balance").value("2000"))
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(content().json(this.objectMapper.writeValueAsString(ACCOUNTS_LIST)));
+    }
+
+    @Test
+    @DisplayName("Test that verifies that the endpoint that performs the saving of an account is working correctly.")
+    void testSave() throws Exception {
+        //Given
+        final Long ID = 5L;
+        final Account ACCOUNT_EXPECTED = DATA.getAccount001().get();
+        ACCOUNT_EXPECTED.setId(ID);
+        final Account NEW_ACCOUNT = DATA.getAccount001().get();
+        NEW_ACCOUNT.setId(null);
+        when(this.accountService.save(any())).then(invocation -> {
+            Account accountArgument = invocation.getArgument(0);
+            accountArgument.setId(ID);
+            return accountArgument;
+        });
+        final Map<String, Object> RESPONSE_EXPECTED = new HashMap<>();
+        RESPONSE_EXPECTED.put("date", LocalDate.now().toString());
+        RESPONSE_EXPECTED.put("status", "CREATED");
+        RESPONSE_EXPECTED.put("message", "Successful saved");
+        RESPONSE_EXPECTED.put("result", ACCOUNT_EXPECTED);
+
+        //When
+        this.mockMvc.perform(post("/api/accounts/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(NEW_ACCOUNT)))
+
+        //Then
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.date").value(LocalDate.now().toString()))
+                .andExpect(jsonPath("$.message").value("Successful saved"))
+                .andExpect(jsonPath("$.status").value("CREATED"))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(RESPONSE_EXPECTED)))
+                .andExpect(jsonPath("$.result.id", is(ID.intValue())))
+                .andExpect(jsonPath("$.result.personName", is("Andrés")))
+                .andExpect(jsonPath("$.result.balance", is(1000)));
+
+        verify(this.accountService).save(any());
     }
 }
