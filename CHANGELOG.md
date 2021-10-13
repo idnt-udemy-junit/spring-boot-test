@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#076` - Probando los endpoints con Swagger UI**  
+  - _The import.sql file has been copied in main context._
+  - _The application.yml from main context has been updated._
+  - _The swagger endpoints have been tested: `http://localhost:8080/v2/api-docs` and `http://localhost:8080/swagger-ui/`._
+  
+
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#075` - Configurando Swagger**
   - _The controller has been updated to `RestController`._
   - _The `springfox-boot-starter` dependency has been added._
