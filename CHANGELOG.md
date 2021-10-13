@@ -6,6 +6,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+--- 
+
+## `v1.1.0` _13/10/2021_
+
+#ADD
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#071` - Escribiendo pruebas para el update y el delete**
+  - _The test to test the `update` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
+  - _The test to test the `delete` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
+  
+
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#070` - Escribiendo pruebas para el save**
+  - _The test to test the `save` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
+  
+
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#069` - Escribiendo pruebas de integración con @DataJpaTest**
+  - _The mapping of the models to the database has been updated._
+  - _The import.sql file has been updated to correct some errors._
+  - _Some tests have been added in `IntegrationJpaTest` class (`testFindById`, `testFindByIdThrowException`, `testFindByPersona`, `testFindByPersonaThrowException` and `testFindAll`)._
+  
+
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#068` - Modificando nuestros repositorios con Spring Data JPA parte 2**  
+  - _A new method to find an `Account` by `personName` attribute has been created in `AccountRepository` class._
+  
+
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#067` - Modificando nuestros repositorios con Spring Data JPA**
+  - _The `SpringBootTestApplicationTests` and `DATA` class has been updated to solve some errors caused that update of repositories and service._ 
+  - _The `AccountServiceImpl` class has been updated to solve some errors caused that update of repositories._
+  - _The repositories has been converted to `JpaRepository`._
+  
+
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#065` - Configurando el contexto de persistencia JPA y clases entities para test**
+  - _The `import.sql` file has been added to aggregate test data to h2 database._
+  - _The models have been mapped to database tables with JPA annotations._
+  - _The configuration to disable Hibernate Log traces from the test context has been added._
+  - _The JPA and h2 database dependencies have been added in pom file._
+  
+
 ---
 
 ## `v1.0.0` _05/10/2021_
