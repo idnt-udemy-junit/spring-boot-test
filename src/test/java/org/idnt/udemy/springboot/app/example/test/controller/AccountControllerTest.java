@@ -1,6 +1,9 @@
 package org.idnt.udemy.springboot.app.example.test.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.idnt.udemy.springboot.app.example.controller.AccountController;
+import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
 import org.idnt.udemy.springboot.app.example.model.Account;
 import org.idnt.udemy.springboot.app.example.service.AccountService;
 import org.idnt.udemy.springboot.app.example.test.util.DATA;
@@ -13,9 +16,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.verify;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AccountController.class)
@@ -25,6 +30,13 @@ public class AccountControllerTest {
 
     @MockBean
     private AccountService accountService;
+
+    private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setUp() {
+        this.objectMapper = new ObjectMapper();
+    }
 
     @Test
     @DisplayName("Test that checks that the endpoint that retrieves the detail of the accounts from the account ID works correctly.")
@@ -44,5 +56,35 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.balance").value("1000"));
 
         verify(this.accountService).findById(ID);
+    }
+
+    @Test
+    @DisplayName("Test that verifies that the endpoint that performs the transfer between accounts from the account IDs is working correctly.")
+    void testTransfer() throws Exception {
+        //Given
+        final Long ID_BANK = 1L;
+        final Long ID_ACC_ORIGIN = 1L;
+        final Long ID_ACC_TARGET = 2L;
+        final BigDecimal QUANTITY = new BigDecimal("500");
+        final TransactionDTO TRANSACTION_DTO = new TransactionDTO(ID_BANK, ID_ACC_ORIGIN, ID_ACC_TARGET, QUANTITY);
+        doNothing().when(this.accountService).transfer(ID_BANK, ID_ACC_ORIGIN, ID_ACC_TARGET, QUANTITY);
+
+        //When
+        this.mockMvc.perform(post("/api/accounts/transfer")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(TRANSACTION_DTO)))
+
+        //Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.date").value(LocalDate.now().toString()))
+                .andExpect(jsonPath("$.message").value("Successful transfer"))
+                .andExpect(jsonPath("$.status").value("OK"))
+                .andExpect(jsonPath("$.transaction.idAccountOrigin").value(ID_ACC_ORIGIN))
+                .andExpect(jsonPath("$.transaction.idAccountTarget").value(ID_ACC_TARGET))
+                .andExpect(jsonPath("$.transaction.idBank").value(ID_BANK))
+                .andExpect(jsonPath("$.transaction.quantity").value(QUANTITY));
+
+        verify(this.accountService).transfer(ID_BANK, ID_ACC_ORIGIN, ID_ACC_TARGET, QUANTITY);
     }
 }
