@@ -1,1 +1,15 @@
+#Logs desactived
+logging:
+  level:
+    org:
+      springframework: off
+
+    root: off
+    hibernate:
+      SQL: debug
+
+#Spring Banner desactived
+spring:
+  main:
+    banner-mode: off
 
