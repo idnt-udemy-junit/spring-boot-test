@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,6 +25,12 @@ public class AccountController {
         return this.accountService.findById(ID);
     }
 
+    @GetMapping("/list")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Account> list(){
+        return null;
+    }
+
     @PostMapping("/transfer")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> transfer(@RequestBody final TransactionDTO transactionDTO){
@@ -36,5 +43,11 @@ public class AccountController {
         response.put("transaction", transactionDTO);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/save")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> save(@RequestBody final Account account){
+        return null;
     }
 }
