@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -87,5 +88,27 @@ public class IntegrationJpaTest {
         //Then
         assertFalse(accounts.isEmpty(), () -> "The result list mustn't be empty");
         assertEquals(2, accounts.size(), () -> "The size of the list isn't what was expected.");
+    }
+
+    @Test
+    @DisplayName("Test that verifies that an account is stored in the database correctly.")
+    void testSave() {
+        //Given
+        final String PERSON_NAME = "Patricia";
+        Account newAccount = new Account(null, PERSON_NAME, new BigDecimal("3000"));
+
+        //When
+        Account accountSaved = this.accountRepository.save(newAccount);
+
+        //Then
+        assertNotNull(accountSaved, () -> "The result mustn't be null");
+        assertEquals("Patricia", accountSaved.getPersonName());
+        assertEquals("3000", accountSaved.getBalance().toPlainString());
+//        Optional<Account> accountOP = this.accountRepository.findByPersonaName(PERSON_NAME);
+//        assertTrue(accountOP.isPresent(), () -> "The result mustn't be null");
+//        Account account = accountOP.get();
+//        assertEquals("Patricia", account.getPersonName());
+//        assertEquals("3000", account.getBalance().toPlainString());
+
     }
 }

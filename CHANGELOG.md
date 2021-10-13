@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 #ADD
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#070` - Escribiendo pruebas para el save**
+  - _The test to test the `save` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
+  
+
 - **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#069` - Escribiendo pruebas de integración con @DataJpaTest**
   - _The mapping of the models to the database has been updated._
   - _The import.sql file has been updated to correct some errors._
