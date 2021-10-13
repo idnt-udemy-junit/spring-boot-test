@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -54,5 +55,15 @@ public class AccountServiceImpl implements AccountService {
         int totalTransactions = bank.getTotalTransactions();
         bank.setTotalTransactions(++totalTransactions);
         this.bankRepository.save(bank);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return null;
+    }
+
+    @Override
+    public Account save(Account account) {
+        return null;
     }
 }
