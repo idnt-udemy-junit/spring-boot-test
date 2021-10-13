@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#075` - Configurando Swagger**
+  - _The controller has been updated to `RestController`._
+  - _The `springfox-boot-starter` dependency has been added._
+  - _The `SpringFox` configuration has been created._
+  - _The application.yml of main context has been updated to avoid show logs messages_
+  
+
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#074` - Creando controller parte 2**
   - _The `TransactionDTO` class has been created to receive transaction data through the body of a POST-type HTTP request._
   - _The `transfer` method has been created in `AccountController` to execute the transfer operation between accounts._
