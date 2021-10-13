@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#074` - Creando controller parte 2**
+  - _The `TransactionDTO` class has been created to receive transaction data through the body of a POST-type HTTP request._
+  - _The `transfer` method has been created in `AccountController` to execute the transfer operation between accounts._
+  - _The `AccountService` methods have been transactionals._
+  - _The h2 dependency has been established for all contexts, it is no longer exclusive to the test context._
+  
 
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#073` - Creando controller**
   - _Account controller created with `detail` method._
