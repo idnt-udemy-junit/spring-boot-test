@@ -2,14 +2,14 @@
 logging:
   level:
     org:
-      springframework: off
+      springframework: info
 
-    root: off
+    root: info
     hibernate:
       SQL: debug
 
 #Spring Banner desactived
 spring:
   main:
-    banner-mode: off
+    banner-mode: LOG
 
