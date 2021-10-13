@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## UNRELEASED
 
 #ADD
+- **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#071` - Escribiendo pruebas para el update y el delete**
+  - _The test to test the `update` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
+  - _The test to test the `delete` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
+  
+
 - **`feature` `#05 - Spring Boot: Test de Repositorios (DataJpaTest)` // `#070` - Escribiendo pruebas para el save**
   - _The test to test the `save` method of `AccountRepository` has been created in `IntegrationJpaTest` class._
   
