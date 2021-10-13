@@ -128,4 +128,18 @@ public class IntegrationJpaTest {
         assertEquals("Patricia", accountEdited.getPersonName());
         assertEquals("2500", accountEdited.getBalance().toPlainString());
     }
+
+    @Test
+    @DisplayName("Test that checks that a record in the accounts table is deleted correctly.")
+    void testDelete() {
+        //Given
+        final Long ID = 2L;
+        Account accountToDelete = this.accountRepository.getById(ID);
+
+        //When
+        this.accountRepository.delete(accountToDelete);
+
+        //Then
+        assertThrows(NoSuchElementException.class, this.accountRepository.findById(ID)::orElseThrow);
+    }
 }
