@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#073` - Creando controller**
+  - _Account controller created with `detail` method._
+
 --- 
 
 ## `v1.1.0` _13/10/2021_
