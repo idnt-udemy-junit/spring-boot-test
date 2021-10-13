@@ -47,7 +47,15 @@ public class AccountController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> save(@RequestBody final Account account){
-        return null;
+    public Map<String, Object> save(@RequestBody final Account account){
+        final Account result = this.accountService.save(account);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("date", LocalDate.now().toString());
+        response.put("status", "CREATED");
+        response.put("message", "Successful saved");
+        response.put("result", result);
+
+        return response;
     }
 }
