@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
@@ -133,5 +134,53 @@ public class AccountControllerWebTestClientTest {
                     assertEquals("2500.00", account.getBalance().toPlainString());
                     assertEquals(ACCOUNT_EXPECTED, account);
                 });
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("1- Integration test that tests the endpoint that obtains the list of accounts.")
+    void testList1() {
+        //When
+        this.webTestClient.get().uri("/api/accounts/list").exchange()
+
+        //Then
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$").isArray()
+                .jsonPath("$").value(hasSize(2))
+                .jsonPath("$[0].id").isEqualTo(1L)
+                .jsonPath("$[0].personName").isEqualTo("Andrés")
+                .jsonPath("$[0].balance").isEqualTo(500)
+                .jsonPath("$[1].id").isEqualTo(2L)
+                .jsonPath("$[1].personName").isEqualTo("Jhon")
+                .jsonPath("$[1].balance").isEqualTo(2500);
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("2- Integration test that tests the endpoint that obtains the list of accounts.")
+    void testList2() {
+        //When
+        this.webTestClient.get().uri("/api/accounts/list").exchange()
+
+        //Then
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBodyList(Account.class)
+                .consumeWith(response -> {
+                    final List<Account> account = response.getResponseBody();
+
+                    assertNotNull(account, () -> "The result mustn't be null");
+                    assertEquals(2, account.size());
+                    assertEquals(1L, account.get(0).getId());
+                    assertEquals("Andrés", account.get(0).getPersonName());
+                    assertEquals("500.0", account.get(0).getBalance().toPlainString());
+                    assertEquals(2L, account.get(1).getId());
+                    assertEquals("Jhon", account.get(1).getPersonName());
+                    assertEquals("2500.0", account.get(1).getBalance().toPlainString());
+                })
+                .hasSize(2)
+                .value(hasSize(2));
     }
 }
