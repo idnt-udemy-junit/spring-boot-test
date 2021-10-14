@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.idnt.udemy.springboot.app.example</groupId>
 	<artifactId>springboot_test</artifactId>
-	<version>v1.1.0</version>
+	<version>v1.2.0</version>
 	<name>springboot_test</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

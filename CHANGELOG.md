@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+
+--- 
+
+## `v1.2.0` _14/10/2021_
+
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#083` - Escribiendo más pruebas para el Service en el método save()**
   - _The `testSave` in `SpringbootTestApplicationTests` class has been created to check that the account service holds an account for the account._
   - _The `save` method in `AccountService` class has been implemented._
