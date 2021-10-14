@@ -8,6 +8,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --- 
 
+## `v1.2.0` _14/10/2021_
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#083` - Escribiendo más pruebas para el Service en el método save()**
+  - _The `testSave` in `SpringbootTestApplicationTests` class has been created to check that the account service holds an account for the account._
+  - _The `save` method in `AccountService` class has been implemented._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#082` - Escribiendo más pruebas para el Service en el método findAll()**
+  - _The `testFindAll` in `SpringbootTestApplicationTests` class has been created to check that the account service retrieves the list of accounts._
+  - _The `findAll` method in `AccountService` class has been implemented._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#081` - Escribiendo más pruebas con MockMvc para el guardar**
+  - _The response status of `save` method of `AccountController` class has been updated by `HttpStatus.CREATED`._
+  - _The `testSave` test in `AccountControllerTest` class has been created to test that the endpoint that performs the saving of an account is working correctly_
+  - _The verify of the call of the `findAll` method of `AccountService` has been added to the `testList` test of `AccountControllerTest` class._
+  - _The `save` method of `AccountController` has been implemented._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#080` - Escribiendo más pruebas con MockMvc para el listar**
+  - _The `findAll` and `save` methods in account service has been created._
+  - _The `list` and `save` methods (endpoints) in account controller has been created._
+  - _The `testList` test in `AccountControllerTest` class has been created to test that the endpoint that performs the account listing is working correctly._
+  - _The `list` method in `AccountController` has been implemented._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#079` - Ejecutando tests con Cobertura de código (Code Coverage)**
+  - _The `date` parameter that return `transfer` method of `AccountController` class has been updated._
+  - _The `testTransfer` test in `AccountControllerTest` class has been updated._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#078` - Escribiendo pruebas para el controlador parte 2**
+  - _The `TransactionDTO` class has been updated._
+  - _The `testTransfer` test has been created in the `AccountControllerTest` class to test the endpoint that performs the transfer operation between accounts from the account IDs._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#077` - Escribiendo pruebas unitarias para el controlador con @WebMvcTest y MockMvc**
+  - _The class `AccountControllerTest` has been created to test the endpoints of our application._
+  - _The `testDetail` test has been created in the `AccountControllerTest` class to test the endpoint that retrieves the account details from the account ID._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#076` - Probando los endpoints con Swagger UI**  
+  - _The import.sql file has been copied in main context._
+  - _The application.yml from main context has been updated._
+  - _The swagger endpoints have been tested: `http://localhost:8080/v2/api-docs` and `http://localhost:8080/swagger-ui/`._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#075` - Configurando Swagger**
+  - _The controller has been updated to `RestController`._
+  - _The `springfox-boot-starter` dependency has been added._
+  - _The `SpringFox` configuration has been created._
+  - _The application.yml of main context has been updated to avoid show logs messages_
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#074` - Creando controller parte 2**
+  - _The `TransactionDTO` class has been created to receive transaction data through the body of a POST-type HTTP request._
+  - _The `transfer` method has been created in `AccountController` to execute the transfer operation between accounts._
+  - _The `AccountService` methods have been transactionals._
+  - _The h2 dependency has been established for all contexts, it is no longer exclusive to the test context._
+  
+
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#073` - Creando controller**
+  - _Account controller created with `detail` method._
+
+--- 
+
 ## `v1.1.0` _13/10/2021_
 
 #ADD
