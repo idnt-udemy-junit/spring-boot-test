@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
+import org.idnt.udemy.springboot.app.example.model.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -87,5 +88,44 @@ public class AccountControllerWebTestClientTest {
                 .jsonPath("$.transaction.idAccountTarget").isEqualTo(ID_ACC_TARGET)
                 .jsonPath("$.transaction.quantity").isEqualTo(QUANTITY)
                 .json(this.objectMapper.writeValueAsString(RESPONSE_EXPECTED));
+    }
+
+    @Test
+    @DisplayName("1- Integration test that tests the endpoint that obtains the details of an account.")
+    void testDetail1() {
+        //Given
+        final Long ID = 1L;
+
+        //When
+        this.webTestClient.get().uri(String.format("/api/accounts/%s", ID)).exchange()
+
+        ///Then
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$.personName").isEqualTo("Andrés")
+                .jsonPath("$.id").isEqualTo(ID)
+                .jsonPath("$.balance").isEqualTo(1000L);
+    }
+
+    @Test
+    @DisplayName("2- Integration test that tests the endpoint that obtains the details of an account.")
+    void testDetail2() {
+        //Given
+        final Long ID = 2L;
+
+        //When
+        this.webTestClient.get().uri(String.format("/api/accounts/%s", ID)).exchange()
+
+        ///Then
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody(Account.class)
+                .consumeWith(response -> {
+                    final Account account = response.getResponseBody();
+                    assertEquals(ID, account.getId());
+                    assertEquals("Jhon", account.getPersonName());
+                    assertEquals("2000.00", account.getBalance().toPlainString());
+                });
     }
 }
