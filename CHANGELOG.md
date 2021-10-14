@@ -5,13 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#089` - Escribiendo test de integración para el guardar**
+  - The `testSave1` and `testSave2` integration tests in `AccountControllerWebTestClientTest` class has been created to test the endpoint that saves an account.
+  
 
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#088` - Escribiendo test de integración para el listar**
-  - _The `testList1` and `testList2` integration tests in `AccountControllerWebTestClientTest` class has been added that tests the endpoint that obtains the list of accounts._
+  - _The `testList1` and `testList2` integration tests in `AccountControllerWebTestClientTest` class has been added to test the endpoint that obtains the list of accounts._
   
 
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#087` - Escribiendo test de integración para el detalle**
-  - _The `testDetail1` and `testDetail2` integration tests in `AccountControllerWebTestClientTest` class have been created that tests the endpoint that obtains the details of an account._
+  - _The `testDetail1` and `testDetail2` integration tests in `AccountControllerWebTestClientTest` class have been created to test the endpoint that obtains the details of an account._
   - _The `AccountControllerWebTestClientTest` class has been annotated with `@TestMethodOrder(MethodOrderer.OrderAnnotation.class)`._
   - _The integration tests have been ordered and updated._
   
@@ -24,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#085` - Configuración y escribiendo las primeras pruebas de integración con WebClient**
   - _The `spring-boot-starter-webflux` dependency has been added._
   - _The `AccountControllerWebTestClientTest` class has been created._
-  - _The `testTransfer` integration test in `AccountControllerWebTestClientTest` class has been created that tests the endpoint that performs a transfer between 2 accounts via their IDs._
+  - _The `testTransfer` integration test in `AccountControllerWebTestClientTest` class has been created to test the endpoint that performs a transfer between 2 accounts via their IDs._
 
 --- 
 
