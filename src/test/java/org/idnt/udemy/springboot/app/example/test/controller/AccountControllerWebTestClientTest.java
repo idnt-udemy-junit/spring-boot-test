@@ -47,7 +47,7 @@ public class AccountControllerWebTestClientTest {
         RESPONSE_EXPECTED.put("transaction", NEW_TRANSACTION);
 
         //When
-        this.webTestClient.post().uri("http://127.0.0.1:8080/api/accounts/transfer")
+        this.webTestClient.post().uri("/api/accounts/transfer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(NEW_TRANSACTION)
                 .exchange()
