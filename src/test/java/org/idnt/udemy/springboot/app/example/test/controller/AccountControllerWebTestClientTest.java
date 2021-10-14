@@ -183,4 +183,76 @@ public class AccountControllerWebTestClientTest {
                 .hasSize(2)
                 .value(hasSize(2));
     }
+
+    @Test
+    @Order(6)
+    @DisplayName("1- Integration test testing the endpoint that saves an account")
+    void testSave1() throws JsonProcessingException {
+        //Given
+        final Account NEW_ACCOUNT = new Account(null, "Patricia", new BigDecimal("3000"));
+        final Account ACCOUNT_EXPECTED = new Account(3L, "Patricia", new BigDecimal("3000"));
+        final Map<String, Object> RESPONSE_EXCEPTED = new HashMap<>();
+        RESPONSE_EXCEPTED.put("date", LocalDate.now().toString());
+        RESPONSE_EXCEPTED.put("status", "CREATED");
+        RESPONSE_EXCEPTED.put("message", "Successful saved");
+        RESPONSE_EXCEPTED.put("result", ACCOUNT_EXPECTED);
+
+        //When
+        this.webTestClient.post().uri("/api/accounts/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(NEW_ACCOUNT)
+                .exchange()
+
+                //Then
+                .expectStatus().isCreated()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$.date").isEqualTo(LocalDate.now().toString())
+                .jsonPath("$.message").isEqualTo("Successful saved")
+                .jsonPath("$.status").isEqualTo("CREATED")
+                .jsonPath("$.result.id").isEqualTo(ACCOUNT_EXPECTED.getId())
+                .jsonPath("$.result.personName").isEqualTo(ACCOUNT_EXPECTED.getPersonName())
+                .jsonPath("$.result.balance").isEqualTo(ACCOUNT_EXPECTED.getBalance())
+                .json(this.objectMapper.writeValueAsString(RESPONSE_EXCEPTED));
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("2- Integration test testing the endpoint that saves an account")
+    void testSave2(){
+        //Given
+        final Account NEW_ACCOUNT = new Account(null, "Pepe", new BigDecimal("5000"));
+        final Account ACCOUNT_EXPECTED = new Account(4L, "Pepe", new BigDecimal("5000"));
+        final Map<String, Object> RESPONSE_EXCEPTED = new HashMap<>();
+        RESPONSE_EXCEPTED.put("date", LocalDate.now().toString());
+        RESPONSE_EXCEPTED.put("status", "CREATED");
+        RESPONSE_EXCEPTED.put("message", "Successful saved");
+        RESPONSE_EXCEPTED.put("result", ACCOUNT_EXPECTED);
+
+        //When
+        this.webTestClient.post().uri("/api/accounts/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(NEW_ACCOUNT)
+                .exchange()
+
+                //Then
+                .expectStatus().isCreated()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .consumeWith(response -> {
+                    try {
+                        final JsonNode json = this.objectMapper.readTree(response.getResponseBody());
+                        final JsonNode resultJson = json.get("result");
+
+                        assertEquals("Successful saved", json.get("message").asText());
+                        assertEquals("CREATED", json.get("status").asText());
+                        assertEquals(LocalDate.now().toString(), json.get("date").asText());
+                        assertEquals(4L, resultJson.get("id").asLong());
+                        assertEquals("Pepe", resultJson.get("personName").asText());
+                        assertEquals("5000", resultJson.get("balance").asText());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
 }
