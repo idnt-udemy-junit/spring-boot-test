@@ -1,6 +1,7 @@
 package org.idnt.udemy.springboot.app.example.test.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -47,14 +49,30 @@ public class AccountControllerWebTestClientTest {
         RESPONSE_EXPECTED.put("transaction", NEW_TRANSACTION);
 
         //When
-        this.webTestClient.post().uri("http://127.0.0.1:8080/api/accounts/transfer")
+        this.webTestClient.post().uri("/api/accounts/transfer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(NEW_TRANSACTION)
                 .exchange()
 
         //Then
                 .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
+                .consumeWith(response -> {
+                    try {
+                        JsonNode json = this.objectMapper.readTree(response.getResponseBody());
+                        JsonNode transaction = json.path("transaction");
+                        assertEquals("Successful transfer", json.path("message").asText());
+                        assertEquals("OK", json.path("status").asText());
+                        assertEquals(LocalDate.now().toString(), json.path("date").asText());
+                        assertEquals(ID_BANK, transaction.path("idBank").asLong());
+                        assertEquals(ID_ACC_ORIGIN, transaction.path("idAccountOrigin").asLong());
+                        assertEquals(ID_ACC_TARGET, transaction.path("idAccountTarget").asLong());
+                        assertEquals(QUANTITY.toPlainString(), transaction.path("quantity").asText());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                })
                 .jsonPath("$.message").isNotEmpty()
                 .jsonPath("$.message").value(is("Successful transfer"))
                 .jsonPath("$.message").isEqualTo("Successful transfer")
