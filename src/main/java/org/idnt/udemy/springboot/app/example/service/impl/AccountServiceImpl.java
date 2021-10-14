@@ -57,13 +57,15 @@ public class AccountServiceImpl implements AccountService {
         this.bankRepository.save(bank);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Account> findAll() {
         return this.accountRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Account save(Account account) {
-        return null;
+        return this.accountRepository.save(account);
     }
 }
