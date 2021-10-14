@@ -291,6 +291,7 @@ public class AccountControllerWebTestClientTest {
         this.webTestClient.get().uri(String.format("/api/accounts/%s", ID)).exchange()
 
         //Then
-                .expectStatus().is5xxServerError();
+                .expectStatus().isNotFound()
+                .expectBody().isEmpty();
     }
 }
