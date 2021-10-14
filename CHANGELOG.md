@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#082` - Escribiendo más pruebas para el Service en el método findAll()**
+  - _The `testFindAll` in `SpringbootTestApplicationTests` class has been created to check that the account service retrieves the list of accounts._
+  - _The `findAll` method in `AccountService` class has been implemented._
+  
+
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#081` - Escribiendo más pruebas con MockMvc para el guardar**
   - _The response status of `save` method of `AccountController` class has been updated by `HttpStatus.CREATED`._
   - _The `testSave` test in `AccountControllerTest` class has been created to test that the endpoint that performs the saving of an account is working correctly_
