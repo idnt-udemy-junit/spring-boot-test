@@ -255,4 +255,42 @@ public class AccountControllerWebTestClientTest {
                     }
                 });
     }
+
+    @Test
+    @Order(8)
+    @DisplayName("Integration test that tests the functionality of the endpoint that deletes an account.")
+    void testDelete() {
+        //Given
+        final Long ID = 4L;
+
+        //When list accounts
+        this.webTestClient.get().uri("/api/accounts/list").exchange()
+
+        //Then list size is 4
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBodyList(Account.class)
+                .hasSize(4);
+
+        //When delete account with id 4
+        this.webTestClient.delete().uri(String.format("/api/accounts/delete/%s", ID)).exchange()
+
+        //Then
+                .expectBody().isEmpty();
+
+        //When list accounts
+        this.webTestClient.get().uri("/api/accounts/list").exchange()
+
+        //Then list size is 3
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBodyList(Account.class)
+                .hasSize(3);
+
+        //When search deleted element by id
+        this.webTestClient.get().uri(String.format("/api/accounts/%s", ID)).exchange()
+
+        //Then
+                .expectStatus().is5xxServerError();
+    }
 }

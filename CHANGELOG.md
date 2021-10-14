@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## UNRELEASED
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#090` - Escribiendo test de integración para el eliminar**
+  - _The `deleteById` method in `AccountService` class has been created_
+  - _The `delete` void method in `AccountController` class has been created_
+  - _The `testDelete` integration test in `AccountControllerWebTestClientTest` class has been created to test the functionality of the endpoint that deletes an account._
+  
+
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#089` - Escribiendo test de integración para el guardar**
   - The `testSave1` and `testSave2` integration tests in `AccountControllerWebTestClientTest` class has been created to test the endpoint that saves an account.
   
