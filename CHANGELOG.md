@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#085` - Configuración y escribiendo las primeras pruebas de integración con WebClient**
+  - _The `spring-boot-starter-webflux` dependency has been added._
+  - _The `AccountControllerWebTestClientTest` class has been created._
+  - _The `testTransfer` integration test in `AccountControllerWebTestClientTest` class has been created that tests the endpoint that performs a transfer between 2 accounts via their IDs._
+
 --- 
 
 ## `v1.2.0` _14/10/2021_
