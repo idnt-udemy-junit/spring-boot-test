@@ -12,5 +12,5 @@ public interface AccountService {
     void transfer(Long idBank, Long idAccountOrigin, Long idAccountTarget, BigDecimal quantity);
     List<Account> findAll();
     Account save(Account account);
-
+    void deleteById(Long id);
 }

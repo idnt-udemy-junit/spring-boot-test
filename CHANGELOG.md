@@ -8,6 +8,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --- 
 
+## `v1.3.0` _14/10/2021_
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#091` - Escribiendo test de integración para el eliminar parte 2**
+  - _The `detail` method in `AccountController` has been updated._
+  - _The `testDelete` integration test in `AccountControllerWebTestClientTest` has been updated._
+  
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#090` - Escribiendo test de integración para el eliminar**
+  - _The `deleteById` method in `AccountService` class has been created_
+  - _The `delete` void method in `AccountController` class has been created_
+  - _The `testDelete` integration test in `AccountControllerWebTestClientTest` class has been created to test the functionality of the endpoint that deletes an account._
+  
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#089` - Escribiendo test de integración para el guardar**
+  - The `testSave1` and `testSave2` integration tests in `AccountControllerWebTestClientTest` class has been created to test the endpoint that saves an account.
+  
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#088` - Escribiendo test de integración para el listar**
+  - _The `testList1` and `testList2` integration tests in `AccountControllerWebTestClientTest` class has been added to test the endpoint that obtains the list of accounts._
+  
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#087` - Escribiendo test de integración para el detalle**
+  - _The `testDetail1` and `testDetail2` integration tests in `AccountControllerWebTestClientTest` class have been created to test the endpoint that obtains the details of an account._
+  - _The `AccountControllerWebTestClientTest` class has been annotated with `@TestMethodOrder(MethodOrderer.OrderAnnotation.class)`._
+  - _The integration tests have been ordered and updated._
+  
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#086` - Escribiendo las primeras pruebas de integración parte 2**
+  - _The uri in `testTransfer` method of `AccountControllerWebTestClientTest` class has been updated._
+  - _The `testTransfer` integration test of `AccountControllerWebTestClientTest` class has been updated._
+  
+
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#085` - Configuración y escribiendo las primeras pruebas de integración con WebClient**
+  - _The `spring-boot-starter-webflux` dependency has been added._
+  - _The `AccountControllerWebTestClientTest` class has been created._
+  - _The `testTransfer` integration test in `AccountControllerWebTestClientTest` class has been created to test the endpoint that performs a transfer between 2 accounts via their IDs._
+
+--- 
+
 ## `v1.2.0` _14/10/2021_
 
 - **`feature` `#06 - Spring Boot: Test de Controladores con MockMvc (WebMvcTest)` // `#083` - Escribiendo más pruebas para el Service en el método save()**

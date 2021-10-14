@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -21,8 +22,16 @@ public class AccountController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Account detail(@PathVariable(name = "id") final Long ID){
-        return this.accountService.findById(ID);
+    public ResponseEntity<?> detail(@PathVariable(name = "id") final Long ID){
+        ResponseEntity<?> result;
+
+        try {
+            result = ResponseEntity.ok(this.accountService.findById(ID));
+        } catch (NoSuchElementException e){
+            result = ResponseEntity.notFound().build();
+        }
+
+        return result;
     }
 
     @GetMapping("/list")
@@ -57,5 +66,11 @@ public class AccountController {
         response.put("result", result);
 
         return response;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(name = "id") final Long id){
+        this.accountService.deleteById(id);
     }
 }
