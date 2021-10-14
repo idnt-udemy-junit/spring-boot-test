@@ -165,4 +165,27 @@ class SpringbootTestApplicationTests {
 		assertTrue(RESULT.contains(DATA.getAccount001().get()), () -> String.format("Te result must contain %s", DATA.getAccount001()));
 		verify(this.accountRepository).findAll();
 	}
+
+	@Test
+	@DisplayName("Test to check that the account service holds an account for the account.")
+	void testSave() {
+		//Given
+		final Long ID = 3L;
+		final Account NEW_ACCOUNT = new Account(null, "Patricia", new BigDecimal("3000"));
+		when(this.accountRepository.save(any())).then(invocation -> {
+			Account accountArg = invocation.getArgument(0);
+			accountArg.setId(ID);
+			return accountArg;
+		});
+
+		//When
+		final Account RESULT = this.accountService.save(NEW_ACCOUNT);
+
+		//Then
+		assertNotNull(RESULT, () -> "The result mustn't be null");
+		assertEquals("Patricia", RESULT.getPersonName());
+		assertEquals(ID, RESULT.getId());
+		assertEquals("3000", RESULT.getBalance().toPlainString());
+		verify(this.accountRepository).save(any());
+	}
 }
