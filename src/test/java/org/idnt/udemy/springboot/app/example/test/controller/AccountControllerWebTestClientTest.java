@@ -4,9 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.idnt.udemy.springboot.app.example.model.Account;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -21,6 +20,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AccountControllerWebTestClientTest {
     @Autowired
@@ -34,6 +34,7 @@ public class AccountControllerWebTestClientTest {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Integration test that tests the endpoint that performs a transfer between 2 accounts via their IDs.")
     void testTransfer() throws JsonProcessingException {
         //Given
@@ -87,5 +88,50 @@ public class AccountControllerWebTestClientTest {
                 .jsonPath("$.transaction.idAccountTarget").isEqualTo(ID_ACC_TARGET)
                 .jsonPath("$.transaction.quantity").isEqualTo(QUANTITY)
                 .json(this.objectMapper.writeValueAsString(RESPONSE_EXPECTED));
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("1- Integration test that tests the endpoint that obtains the details of an account.")
+    void testDetail1() throws JsonProcessingException {
+        //Given
+        final Long ID = 1L;
+        final Account ACCOUNT_EXPECTED = new Account(ID, "Andrés", new BigDecimal("500"));
+
+        //When
+        this.webTestClient.get().uri(String.format("/api/accounts/%s", ID)).exchange()
+
+        ///Then
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$.personName").isEqualTo("Andrés")
+                .jsonPath("$.id").isEqualTo(ID)
+                .jsonPath("$.balance").isEqualTo(500L)
+                .json(this.objectMapper.writeValueAsString(ACCOUNT_EXPECTED));
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("2- Integration test that tests the endpoint that obtains the details of an account.")
+    void testDetail2() {
+        //Given
+        final Long ID = 2L;
+        final Account ACCOUNT_EXPECTED = new Account(ID, "Jhon", new BigDecimal("2500.00"));
+
+        //When
+        this.webTestClient.get().uri(String.format("/api/accounts/%s", ID)).exchange()
+
+        ///Then
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody(Account.class)
+                .consumeWith(response -> {
+                    final Account account = response.getResponseBody();
+                    assertEquals(ID, account.getId());
+                    assertEquals("Jhon", account.getPersonName());
+                    assertEquals("2500.00", account.getBalance().toPlainString());
+                    assertEquals(ACCOUNT_EXPECTED, account);
+                });
     }
 }
