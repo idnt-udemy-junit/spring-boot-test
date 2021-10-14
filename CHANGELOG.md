@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+--- 
+
+## `v1.3.0` _14/10/2021_
+
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#091` - Escribiendo test de integración para el eliminar parte 2**
-- _The `detail` method in `AccountController` has been updated._
-- _The `testDelete` integration test in `AccountControllerWebTestClientTest` has been updated._
+  - _The `detail` method in `AccountController` has been updated._
+  - _The `testDelete` integration test in `AccountControllerWebTestClientTest` has been updated._
   
 
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#090` - Escribiendo test de integración para el eliminar**
