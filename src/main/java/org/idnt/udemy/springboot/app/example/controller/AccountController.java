@@ -58,4 +58,10 @@ public class AccountController {
 
         return response;
     }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(name = "id") final Long id){
+        this.accountService.deleteById(id);
+    }
 }
