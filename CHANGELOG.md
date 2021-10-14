@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+- **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#087` - Escribiendo test de integración para el detalle**
+  - _The `testDetail1` and `testDetail2` integration tests in `AccountControllerWebTestClientTest` class have been created that tests the endpoint that obtains the details of an account._
+  - _The `AccountControllerWebTestClientTest` class has been annotated with `@TestMethodOrder(MethodOrderer.OrderAnnotation.class)`._
+  - _The integration tests have been ordered and updated._
+  
+
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#086` - Escribiendo las primeras pruebas de integración parte 2**
   - _The uri in `testTransfer` method of `AccountControllerWebTestClientTest` class has been updated._
   - _The `testTransfer` integration test of `AccountControllerWebTestClientTest` class has been updated._
