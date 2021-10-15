@@ -16,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,5 +109,40 @@ public class AccountrControllerTestRestTemplateTest {
         assertEquals(ID, account.getId());
         assertEquals("Andrés", account.getPersonName());
         assertEquals("500.00", account.getBalance().toPlainString());
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Integration test that tests the endpoint that obtains the list of accounts.")
+    void testList() throws JsonProcessingException {
+        //When
+        final ResponseEntity<Account[]> RESPONSE_ENTITY_ACCOUNT = this.testRestTemplate.getForEntity(
+                String.format("%s/api/accounts/list", this.host), Account[].class);
+
+        //Then
+        assertNotNull(RESPONSE_ENTITY_ACCOUNT, () -> "The response mutsn't be null");
+        assertEquals(HttpStatus.OK, RESPONSE_ENTITY_ACCOUNT.getStatusCode());
+        assertEquals(MediaType.APPLICATION_JSON, RESPONSE_ENTITY_ACCOUNT.getHeaders().getContentType());
+
+        final List<Account> accounts = Arrays.asList(RESPONSE_ENTITY_ACCOUNT.getBody());
+
+        assertNotNull(accounts, () -> "The result mustn't be null");
+        assertEquals(2, accounts.size());
+        assertEquals(1L, accounts.get(0).getId());
+        assertEquals("Andrés", accounts.get(0).getPersonName());
+        assertEquals("500.00", accounts.get(0).getBalance().toPlainString());
+        assertEquals(2L, accounts.get(1).getId());
+        assertEquals("Jhon", accounts.get(1).getPersonName());
+        assertEquals("2500.00", accounts.get(1).getBalance().toPlainString());
+
+        final JsonNode RESPONSE_JSON = this.objectMapper.readTree(this.objectMapper.writeValueAsString(accounts));
+        assertNotNull(RESPONSE_JSON, () -> "The result mustn't be null");
+        assertEquals(2, RESPONSE_JSON.size());
+        assertEquals(1L, RESPONSE_JSON.get(0).path("id").asLong());
+        assertEquals("Andrés", RESPONSE_JSON.get(0).path("personName").asText());
+        assertEquals("500.0", RESPONSE_JSON.get(0).path("balance").asText());
+        assertEquals(2L, RESPONSE_JSON.get(1).path("id").asLong());
+        assertEquals("Jhon", RESPONSE_JSON.get(1).path("personName").asText());
+        assertEquals("2500.0", RESPONSE_JSON.get(1).path("balance").asText());
     }
 }
