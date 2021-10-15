@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#097` - Escribiendo test de integración para el guardar**
+  - _The `testSave` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the endpoint that saves an account._
+  
+
 - **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#096` - Escribiendo test de integración para el listar**
   - _The `testList` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the endpoint that obtains the list of accounts._
   
