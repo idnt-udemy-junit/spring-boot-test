@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#093` - Configuración y escribiendo primeras pruebas de integración con TestRestTemplate**
+  - _The `AccountrControllerTestRestTemplateTest` class to create integration tests with `TestRestTemplate` class has been created._
+  - _The `testTransfer` integration in `AccountrControllerTestRestTemplateTest` class has been created._
+
 --- 
 
 ## `v1.3.0` _14/10/2021_
