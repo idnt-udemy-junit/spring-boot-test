@@ -8,6 +8,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --- 
 
+## `v1.4.0` _15/10/2021_
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#099` - Corriendo todos los tests**
+  - _The integration tests have been annoted with `Tag` annotation to may exclude some integration test._
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#098` - Escribiendo test de integración para el eliminar**
+  - _The `testDelete` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the functionality of the endpoint that deletes an account._
+  
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#097` - Escribiendo test de integración para el guardar**
+  - _The `testSave` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the endpoint that saves an account._
+  
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#096` - Escribiendo test de integración para el listar**
+  - _The `testList` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the endpoint that obtains the list of accounts._
+  
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#095` - Escribiendo test de integración para el detalle**
+  - _The `testDetail` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the endpoint that obtains the details of an account._
+  
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#094` - Escribiendo primeras pruebas de integración parte 2**
+  - _The `testTransfer` integration test in `AccountrControllerTestRestTemplateTest` class has been updated._
+  
+
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#093` - Configuración y escribiendo primeras pruebas de integración con TestRestTemplate**
+  - _The `AccountrControllerTestRestTemplateTest` class to create integration tests with `TestRestTemplate` class has been created._
+  - _The `testTransfer` integration in `AccountrControllerTestRestTemplateTest` class has been created._
+
+--- 
+
 ## `v1.3.0` _14/10/2021_
 
 - **`feature` `#07 - Spring Boot: Test de integración de Servicios Rest con WebTestClient` // `#091` - Escribiendo test de integración para el eliminar parte 2**
