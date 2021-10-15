@@ -1,5 +1,7 @@
 package org.idnt.udemy.springboot.app.example.test.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
 import org.junit.jupiter.api.*;
@@ -39,7 +41,7 @@ public class AccountrControllerTestRestTemplateTest {
     @Test
     @Order(1)
     @DisplayName("Integration test that tests the endpoint that performs a transfer between 2 accounts via their IDs.")
-    void testTransfer() {
+    void testTransfer() throws JsonProcessingException {
         //Given
         final Long ID_BANK = 1L;
         final Long ID_ACC_ORIGIN = 1L;
@@ -65,9 +67,21 @@ public class AccountrControllerTestRestTemplateTest {
         assertTrue(RESPONSE_STR.contains("Successful transfer"), () -> "The response must be contain \"Successful transfer\"");
         assertTrue(RESPONSE_STR.contains(LocalDate.now().toString()), () -> String.format("The response must be contain \"%s\"", LocalDate.now()));
 
-        final String TRANSACTION_JSON_EXPECTED = String.format("{\"idBank\":%s,\"idAccountOrigin\":%s,\"idAccountTarget\":%s,\"quantity\":%s}",
+        final String TRANSACTION_JSON_STR_EXPECTED = String.format("{\"idBank\":%s,\"idAccountOrigin\":%s,\"idAccountTarget\":%s,\"quantity\":%s}",
                 NEW_TRANSACTION.getIdBank(), NEW_TRANSACTION.getIdAccountOrigin(), NEW_TRANSACTION.getIdAccountTarget(), NEW_TRANSACTION.getQuantity());
-        assertTrue(RESPONSE_STR.contains(TRANSACTION_JSON_EXPECTED), () -> String.format("The response must be contain \"%s\"",
-                TRANSACTION_JSON_EXPECTED));
+        assertTrue(RESPONSE_STR.contains(TRANSACTION_JSON_STR_EXPECTED), () -> String.format("The response must be contain \"%s\"",
+                TRANSACTION_JSON_STR_EXPECTED));
+
+        final JsonNode RESPONSE_JSON = this.objectMapper.readTree(RESPONSE_STR);
+        assertEquals("OK", RESPONSE_JSON.path("status").asText());
+        assertEquals("Successful transfer", RESPONSE_JSON.path("message").asText());
+        assertEquals(LocalDate.now().toString(), RESPONSE_JSON.path("date").asText());
+
+        final JsonNode TRANSACTION_JSON_RESPONSE = RESPONSE_JSON.path("transaction");
+        assertEquals(NEW_TRANSACTION.getIdBank(), TRANSACTION_JSON_RESPONSE.path("idBank").asLong());
+        assertEquals(NEW_TRANSACTION.getIdAccountOrigin(), TRANSACTION_JSON_RESPONSE.path("idAccountOrigin").asLong());
+        assertEquals(NEW_TRANSACTION.getIdAccountTarget(), TRANSACTION_JSON_RESPONSE.path("idAccountTarget").asLong());
+        assertEquals(NEW_TRANSACTION.getQuantity().toPlainString(), TRANSACTION_JSON_RESPONSE.path("quantity").asText());
+        assertEquals(this.objectMapper.writeValueAsString(RESPONSE_EXPECTED), RESPONSE_STR);
     }
 }
