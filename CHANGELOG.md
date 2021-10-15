@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## UNRELEASED
 
+- **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#099` - Corriendo todos los tests**
+  - _The integration tests have been annoted with `Tag` annotation to may exclude some integration test._
+
 - **`feature` `#08 - Spring Boot: Test de integración de Servicios Rest con TestRestTemplate` // `#098` - Escribiendo test de integración para el eliminar**
   - _The `testDelete` integration test in `AccountrControllerTestRestTemplateTest` class has been created to tests the functionality of the endpoint that deletes an account._
   
