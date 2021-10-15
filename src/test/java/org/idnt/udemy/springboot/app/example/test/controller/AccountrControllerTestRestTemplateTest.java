@@ -145,4 +145,39 @@ public class AccountrControllerTestRestTemplateTest {
         assertEquals("Jhon", RESPONSE_JSON.get(1).path("personName").asText());
         assertEquals("2500.0", RESPONSE_JSON.get(1).path("balance").asText());
     }
+
+    @Test
+    @Order(4)
+    @DisplayName("Integration test testing the endpoint that saves an account")
+    void testSave() throws JsonProcessingException {
+        //Given
+        final Long ID = 3L;
+        final Account NEW_ACCOUNT = new Account(null, "Pepe", new BigDecimal("5000"));
+        final Account ACCOUNT_EXPECTED = new Account(ID, "Pepe", new BigDecimal("5000"));
+        final Map<String, Object> RESPONSE_EXCEPTED = new HashMap<>();
+        RESPONSE_EXCEPTED.put("date", LocalDate.now().toString());
+        RESPONSE_EXCEPTED.put("status", "CREATED");
+        RESPONSE_EXCEPTED.put("message", "Successful saved");
+        RESPONSE_EXCEPTED.put("result", ACCOUNT_EXPECTED);
+
+        //When
+        final ResponseEntity<String> RESPONSE_BODY= this.testRestTemplate.postForEntity(
+                String.format("%s/api/accounts/save", this.host),NEW_ACCOUNT, String.class);
+
+        //Then
+        assertNotNull(RESPONSE_BODY, () -> "The response mutsn't be null");
+        assertEquals(HttpStatus.CREATED, RESPONSE_BODY.getStatusCode());
+        assertEquals(MediaType.APPLICATION_JSON, RESPONSE_BODY.getHeaders().getContentType());
+
+        final String RESPONSE_BODY_STR = RESPONSE_BODY.getBody();
+        final JsonNode RESPONSE_BODY_JSON = this.objectMapper.readTree(RESPONSE_BODY_STR);
+        final JsonNode RESPONSE_ACCOUNT_JSON = RESPONSE_BODY_JSON.get("result");
+
+        assertEquals("Successful saved", RESPONSE_BODY_JSON.get("message").asText());
+        assertEquals("CREATED", RESPONSE_BODY_JSON.get("status").asText());
+        assertEquals(LocalDate.now().toString(), RESPONSE_BODY_JSON.get("date").asText());
+        assertEquals(ID, RESPONSE_ACCOUNT_JSON.get("id").asLong());
+        assertEquals("Pepe", RESPONSE_ACCOUNT_JSON.get("personName").asText());
+        assertEquals("5000", RESPONSE_ACCOUNT_JSON.get("balance").asText());
+    }
 }
