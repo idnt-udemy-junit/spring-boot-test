@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.idnt.udemy.springboot.app.example.controller.dto.TransactionDTO;
+import org.idnt.udemy.springboot.app.example.model.Account;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -83,5 +84,28 @@ public class AccountrControllerTestRestTemplateTest {
         assertEquals(NEW_TRANSACTION.getIdAccountTarget(), TRANSACTION_JSON_RESPONSE.path("idAccountTarget").asLong());
         assertEquals(NEW_TRANSACTION.getQuantity().toPlainString(), TRANSACTION_JSON_RESPONSE.path("quantity").asText());
         assertEquals(this.objectMapper.writeValueAsString(RESPONSE_EXPECTED), RESPONSE_STR);
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Integration test that tests the endpoint that obtains the details of an account.")
+    void testDetail(){
+        //Given
+        final Long ID = 1L;
+        final Account ACCOUNT_EXPECTED = new Account(ID, "Andrés", new BigDecimal("500"));
+
+        //When
+        final ResponseEntity<Account> RESPONSE_ENTITY_ACCOUNT = this.testRestTemplate.getForEntity(
+                String.format("%s/api/accounts/%s", this.host, ID), Account.class);
+
+        //Then
+        assertNotNull(RESPONSE_ENTITY_ACCOUNT, () -> "The response mutsn't be null");
+        assertEquals(HttpStatus.OK, RESPONSE_ENTITY_ACCOUNT.getStatusCode());
+        assertEquals(MediaType.APPLICATION_JSON, RESPONSE_ENTITY_ACCOUNT.getHeaders().getContentType());
+
+        final Account account = RESPONSE_ENTITY_ACCOUNT.getBody();
+        assertEquals(ID, account.getId());
+        assertEquals("Andrés", account.getPersonName());
+        assertEquals("500.00", account.getBalance().toPlainString());
     }
 }
