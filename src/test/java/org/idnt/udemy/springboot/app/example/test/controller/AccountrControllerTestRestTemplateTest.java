@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -179,5 +180,42 @@ public class AccountrControllerTestRestTemplateTest {
         assertEquals(ID, RESPONSE_ACCOUNT_JSON.get("id").asLong());
         assertEquals("Pepe", RESPONSE_ACCOUNT_JSON.get("personName").asText());
         assertEquals("5000", RESPONSE_ACCOUNT_JSON.get("balance").asText());
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Integration test that tests the functionality of the endpoint that deletes an account.")
+    void testDelete() {
+        //Given
+        final Long ID = 3L;
+        final ResponseEntity<Account[]> PRE_LIST_RESPONSE = this.testRestTemplate.getForEntity(
+                String.format("%s/api/accounts/list", this.host), Account[].class);
+        assertNotNull(PRE_LIST_RESPONSE, () -> "The pre list response mutsn't be null");
+        assertEquals(HttpStatus.OK, PRE_LIST_RESPONSE.getStatusCode());
+        assertEquals(MediaType.APPLICATION_JSON, PRE_LIST_RESPONSE.getHeaders().getContentType());
+
+        //When
+//        this.testRestTemplate.delete(String.format("%s/api/accounts/delete/%s", this.host, ID));
+        final Map<String, Object> PATH_VARIABLES = new HashMap<>();
+        PATH_VARIABLES.put("id", ID);
+        ResponseEntity<Void> RESPONSE_EXCHANGE = this.testRestTemplate.exchange(
+//                String.format("%s/api/accounts/delete/%s", this.host, ID), HttpMethod.DELETE, null, Void.class);
+                String.format("%s/api/accounts/delete/{id}", this.host, ID), HttpMethod.DELETE, null, Void.class, PATH_VARIABLES);
+        assertNotNull(RESPONSE_EXCHANGE, () -> "The post list response mutsn't be null");
+        assertEquals(HttpStatus.NO_CONTENT, RESPONSE_EXCHANGE.getStatusCode());
+        assertFalse(RESPONSE_EXCHANGE.hasBody(), () -> "The response mustn't have body");
+
+        final ResponseEntity<Account[]> POST_LIST_RESPONSE = this.testRestTemplate.getForEntity(
+                String.format("%s/api/accounts/list", this.host), Account[].class);
+        assertNotNull(POST_LIST_RESPONSE, () -> "The post list response mutsn't be null");
+        assertEquals(HttpStatus.OK, PRE_LIST_RESPONSE.getStatusCode());
+        assertEquals(MediaType.APPLICATION_JSON, PRE_LIST_RESPONSE.getHeaders().getContentType());
+
+        //Then
+        List<Account> PRE_LIST = Arrays.asList(PRE_LIST_RESPONSE.getBody());
+        assertEquals(3, PRE_LIST.size());
+        List<Account> POST_LIST = Arrays.asList(POST_LIST_RESPONSE.getBody());
+        assertEquals(2, POST_LIST.size());
+
     }
 }
